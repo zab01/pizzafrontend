@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta2
+kind: Replicaset
+metadata:
+  name: pizzafrontend
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pizzafrontend
+    spec:
+      containers:
+      - name: pizzafrontend
+        image: pizzafrontend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+  selector:
+    matchLabels:
+        app: pizzafrontend

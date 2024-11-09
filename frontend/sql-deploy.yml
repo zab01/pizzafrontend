@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: mssql-server
+  name: mssql-server
+spec:
+  volumes:
+    - name: sqldata
+      persistentVolumeClaim:
+        claimName: dbclaim
+  initContainers:
+  - name: volume-permissions
+    image: busybox
+    command: ["sh", "-c", "chown -R 10001:0 /var/opt/mssql"]
+    volumeMounts:
+    - mountPath: "/var/opt/mssql"
+      name: sqldata
+  containers:
+  - name: mssql-server
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    imagePullPolicy: IfNotPresent
+    env:
+    - name: ACCEPT_EULA
+      value: "Y"
+    - name: SA_PASSWORD
+      value: "numsey#2021"
+    - name: MSSQL_PID
+      value: "Express"
+    ports:
+    - containerPort: 1433
+      name: mssql-server
+    volumeMounts:
+    - mountPath: "/var/opt/mssql"
+      name: sqldata
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+   name: mssql-server
+spec:
+  type: NodePort
+  ports:
+  - port: 1433 
+    nodePort: 31433
+  selector:
+    run: mssql-server

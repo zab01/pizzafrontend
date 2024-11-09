@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deplopyment
+metadata:
+  name: mssql
+spec:
+  serviceName: "mssql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql
+  template:
+    metadata:
+      labels:
+        app: mssql
+    spec:
+      securityContext:
+        fsGroup: 10001
+      containers:
+      - name: mssql
+        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+        ports:
+        - containerPort: 1433
+          name: tcpsql
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          value: "numsey#2021"
+        volumeMounts:
+        - name: mssql
+          mountPath: "/var/opt/mssql/data"
+  volumeClaimTemplates:
+  - metadata:
+      name: mssql
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 256Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: mssql
+spec:
+  type: NodePort
+  ports:
+  - port: 1433 
+    nodePort: 31433
+  selector:
+    run: mydb
