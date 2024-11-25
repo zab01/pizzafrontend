@@ -1,1 +1,97 @@
-C:/Users/Fabio/Dev/Kubernetes/Info.txt
+WSL
+Docker
+MiniKube
+	kubectl
+	minikube status
+	minikube start
+	minikube stop
+	
+WSL - Copy to / from
+\\WSL$
+
+restart wsl
+wsl --shutdown
+
+[Create Image]
+	docker build . -t <image>:latest
+	minikube docker-env
+	REM @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+	---
+	minikube image load <image name>
+	imagePullPolicy: IfNotPresent
+Create Cluster
+	kubectl start
+Deploy image
+	kubectl apply -f deployment.yaml
+		use online or local image
+Start app
+	minikube service pizzafrontend
+
+	minikube service server-status --url
+
+Useful Commands
+docker build . -t pizzafrontend:latest
+kubectl get pods
+kubectl get deployments
+kubectl delete deployment pizzafrontend
+minikube image unload pizzafrontend
+minikube image load pizzafrontend
+kubectl apply -f deploy-frontend.yml
+
+minikube delete [elimina o cluster e todos os pods/containers]
+kubectl run nginx --image=nginx [cria um pod ]
+kubectl delete pod nginx
+kubectl scale --replicas=4 -f my-replicaset.yaml
+
+kubectl exec -it dotnet-app -- /bin/bash - connect to container shell
+kubectl cp example.txt my-pod:/tmp
+kubectl logs <pod-name> -c <container-name>
+minikube dashboard
+
+Unload and Reload Image
+docker build . -t pizzafrontend:latest
+--
+kubectl delete deployment pizzafrontend
+minikube image unload pizzafrontend
+minikube image load pizzafrontend
+kubectl apply -f frontend\frontend-deploy-src.yml
+
+--
+minikube service pizzafrontend
+
+-- sql server on docker container
+docker run -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=numsey#2021' -e 'MSSQL_PID=Express' -p 1433:1433
+docker-compose up --build
+
+--sql server on kubernetes pod
+
+kubectl apply -f frontend/sql-storage.yml
+kubectl get pv
+kubectl get pvc
+kubectl apply -f frontend/sql-deploy.yml
+
+kubectl delete -f frontend/sql-deploy.yml
+kubectl delete -f frontend/sql-storage.yml
+kubectl logs mssql-server
+kubectl delete pvc dbclaim --grace-period=0 --force
+kubectl get svc
+kubectl kubectl port-forward mssql-server 15789:1433
+kubectl describe service <service-name>
+kubectl get nodes -o wide
+
+-- pods dnss
+<pod-name>.<namespace>.pod.cluster.local
+mssql-server.default.pod.cluster.local
+
+<service-name>.<namespace>.svc.cluster.local
+mssql-server.default.svc.cluster.local
+
+--redis
+kubectl apply -f kubernetes/redis-deploy.yml
+kubectl apply -f kubernetes/redis-service.yml
+kubectl apply -f kubernetes/redis-cli-deploy.yml
+
+kubectl exec -it redis-client -- redis-cli -h redis
+
+docker run --name my-redis -p 6379:6379 -d redis
+docker run --name local-redis -p 6379:6379 -d redis

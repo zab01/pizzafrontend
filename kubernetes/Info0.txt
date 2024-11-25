@@ -1,1 +1,45 @@
-C:/Users/Fabio/Dev/Kubernetes/Info0.txt
+minikube alternatives
+https://www.blueshoe.io/blog/minikube-vs-k3d-vs-kind-vs-getdeck-beiboot/
+
+minikube
+k3s/k3d
+kind
+
+exemplo inicial (img /simple java server status app)
+https://www.google.com/search?q=instalando+kubernetes+no+windows&sca_esv=a705397e3bbcc753&ei=xMITZ4rWG_u05OUP0sDBgQ4&ved=0ahUKEwiKyKi11JqJAxV7GrkGHVJgMOAQ4dUDCBA&uact=5&oq=instalando+kubernetes+no+windows&gs_lp=Egxnd3Mtd2l6LXNlcnAiIGluc3RhbGFuZG8ga3ViZXJuZXRlcyBubyB3aW5kb3dzMgUQIRifBTIFECEYnwUyBRAhGJ8FMgUQIRifBTIFECEYnwUyBRAhGJ8FSORYUABYmFdwAHgBkAEAmAG-AaABtB-qAQQyLjMwuAEDyAEA-AEBmAIgoAK2IsICChAAGIAEGEMYigXCAgsQABiABBixAxiDAcICCBAAGIAEGLEDwgIFEAAYgATCAggQLhiABBixA8ICDRAAGIAEGLEDGIMBGArCAgcQABiABBgKwgIIEAAYgAQYogTCAggQABiiBBiJBcICBRAhGKABmAMAkgcEMC4zMqAH6I4B&sclient=gws-wiz-serp#fpstate=ive&vld=cid:0bb36310,vid:ly710PY-iyU,st:0
+
+exemplo node (src / simple node/mongo todo app) *uses minikube local registry*
+https://medium.com/cloud-native-daily/how-to-deploy-a-containerized-node-js-api-using-kubernetes-8192c54ec465
+
+exemplo dotnet (src / simple dotnet mvc pizza order app)
+https://macoratti.net/22/05/kubern_aspndeplo1.htm
+
+usando local images no minikube
+https://www.baeldung.com/ops/docker-local-images-minikube
+
+kubernetes em detalhes
+https://medium.com/@habbema/kubernetes-69ce6ee73baf 
+
+sql server
+docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+docker compose sql server asp.net core
+https://www.macoratti.net/21/04/docker_sqlasp1.htm
+
+docker compose dotnet core + sql server 
+https://www.ezzylearning.net/tutorial/dockerize-asp-net-core-api-and-sql-server
+
+kubernetes + sql server
+https://rajanieshkaushikk.com/2021/02/27/how-to-deploy-sql-server-containers-to-a-kubernetes-cluster-for-high-availability/
+
+kubernetes +sql server on linux * host volumes
+https://www.phillipsj.net/posts/sql-server-on-linux-on-kubernetes-part-2/
+
+redis + kubernetes
+https://medium.com/@harshaljethwa19/redis-deploying-redis-on-kubernetes-building-chat-applications-with-redis-pub-sub-on-kubernetes-f81a56ec0273
+
+redis cache in dotnet
+https://dotnetfullstackdev.medium.com/redis-cache-in-net-core-a-beginners-end-to-end-guide-8584379f6f0e
+
+redis macoratti
+https://macoratti.net/21/04/aspc_cacheredis1.htm
