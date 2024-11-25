@@ -6,13 +6,14 @@ using System.Diagnostics;
 namespace frontend.Controllers;
 
 public class HomeController : Controller
-{
+{   private readonly IPizzaService _service;
+    private readonly IConfiguration _configuration;
     private static string? ErrorMessage;
-    private readonly IPizzaService _service;
     public IEnumerable<PizzaInfo> Pizzas;
-    public HomeController(IPizzaService service)
+    public HomeController(IPizzaService service, IConfiguration configuration)
     {
         _service = service;
+        _configuration = configuration;
     }
     public IActionResult Index()
     {
@@ -20,8 +21,14 @@ public class HomeController : Controller
     }
     public IActionResult GetPizzas()
     {
+        var dbServer = _configuration.GetValue<string>("DbServer");
+        var conStr = _configuration.GetValue<string>("ConStr");
+        
         try {
-            Pizzas = _service.GetPizzasDB_SQLServer();
+            if (dbServer == "SQlite")
+                Pizzas = _service.GetPizzasDB_SQlite(conStr);
+            else
+                Pizzas = _service.GetPizzasDB_SQLServer(conStr);
         }
         catch (Exception ex)
         {

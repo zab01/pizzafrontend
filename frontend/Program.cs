@@ -2,6 +2,13 @@ using frontend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            options.InstanceName = "frontend_"; // Optional prefix for cache keys
+        });
+builder.Services.AddControllers();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

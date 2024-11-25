@@ -1,0 +1,9 @@
+##Connection Strings References##
+
+#SQlite
+local sqlite constr = "Data Source=cardapio.db"
+
+#SQL Server
+kube sql server = "Server=10.109.180.107,1433;Initial Catalog=Cardapio;User ID=sa;Password=numsey#2021;TrustServerCertificate=True"
+kube sql server = "Server=mssql-server,1433;Initial Catalog=Cardapio;User ID=sa;Password=numsey#2021;TrustServerCertificate=True"
+docker sql server = "Server=a.b.c.d,1433;Initial Catalog=Cardapio;User ID=sa;Password=numsey#2021;TrustServerCertificate=True"

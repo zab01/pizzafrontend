@@ -21,12 +21,12 @@ public class PizzaService : IPizzaService
         return pizzas;
     }
 
-    public IEnumerable<PizzaInfo> GetPizzasDB_SQlite()
+    public IEnumerable<PizzaInfo> GetPizzasDB_SQlite(string conStr)
     {
         List<PizzaInfo> pizzas;
         PizzaInfo pizza;
 
-        using (var connection = new SqliteConnection("Data Source=cardapio.db"))
+        using (var connection = new SqliteConnection(conStr))
         {
             connection.Open();
 
@@ -52,13 +52,12 @@ public class PizzaService : IPizzaService
         return pizzas;
     }
 
-    public IEnumerable<PizzaInfo> GetPizzasDB_SQLServer()
+    public IEnumerable<PizzaInfo> GetPizzasDB_SQLServer(string conStr)
     {
         List<PizzaInfo> pizzas;
         PizzaInfo pizza;
 
-        //using (var connection = new SqlConnection("Server=10.109.180.107,1433;Initial Catalog=Cardapio;User ID=sa;Password=numsey#2021;TrustServerCertificate=True"))
-        using (var connection = new SqlConnection("Server=mssql-server,1433;Initial Catalog=Cardapio;User ID=sa;Password=numsey#2021;TrustServerCertificate=True"))
+        using (var connection = new SqlConnection(conStr))
         {
             connection.Open();
 
